@@ -3,13 +3,13 @@ import pickle
 import pandas as pd
 from data_model import Water
 
-#Creating an instance of fast API
+#Creating an instance of fastapi
 app=FastAPI(
     title="water potability prediction",
     description='predicting water potability'
 )
 
-#Loading our pre-trained model
+#Loading our pretrained model
 with open('model.pkl','rb') as f:
     model=pickle.load(f)
 
@@ -17,7 +17,7 @@ with open('model.pkl','rb') as f:
 
 @app.get('/')
 def index():
-    return "Welcome to our water potability system"
+    return "Welcome to our water potability system fast api"
 
 @app.post('/predict')
 def model_predict(water: Water):

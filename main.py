@@ -11,7 +11,7 @@ app = FastAPI(
 
 # Load the pretrained model
 # Update the path if necessary to be relative or correctly configured for deployment
-model = load('C:/Users/kvaru/OneDrive - UT Arlington/MLops/water potability/src/model.joblib')
+model = load('model.joblib')
 
 @app.get('/')
 def index():

@@ -1,20 +1,16 @@
-﻿joblib==1.4.2
-numpy==2.0.0
-pandas==2.2.2
-python-dateutil==2.9.0.post0
+fastapi==0.85.0
+uvicorn[standard]==0.18.3
+numpy==1.25.1  # Unified to a single version suitable for your other packages
+pandas==1.5.0  # Unified to a single version
+python-dateutil==2.9.0.post
 pytz==2024.1
 PyYAML==6.0.1
-scikit-learn==1.5.1
+scikit-learn==1.0.2  # Ensure this version is compatible with your model and Python version
 scipy==1.13.1
 six==1.16.0
 threadpoolctl==3.5.0
 tzdata==2024.1
-fastapi==0.85.0
-uvicorn[standard]==0.18.3
-pandas==1.5.0
 pydantic==1.10.3
-pickle5==0.0.12  # Use pickle5 if Python version is below 3.8
-numpy==1.25.1
-scikit-learn==1.0.2  # As previously discussed
-Cython==0.29.32  # If you have dependencies that require compilation
-
+pickle5==0.0.12  # Only if you're using Python version below 3.8
+Cython==0.29.32  # Required for building some packages from source
+joblib==1.4.2  # Ensure compatibility with scikit-learn version

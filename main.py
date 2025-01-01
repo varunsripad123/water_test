@@ -1,40 +1,36 @@
 from fastapi import FastAPI
-import pickle
 import pandas as pd
+from joblib import load  # Import load function from joblib
 from data_model import Water
 
+# Create an instance of FastAPI
 app = FastAPI(
-    title= "Water Potability Prediction",
-    description= "Predicting Water Potability"
-    )
+    title="Water Potability Prediction",
+    description='Predicting water potability'
+)
 
+# Load the pretrained model
+# Update the path if necessary to be relative or correctly configured for deployment
+model = load('C:/Users/kvaru/OneDrive - UT Arlington/MLops/water potability/src/model.joblib')
 
-with open("model.pkl","rb") as f:
-    model = pickle.load(f)
-
-
-@app.get("/")
+@app.get('/')
 def index():
-    return "Welcome to Water Potability Prediction FastAPI"
+    return "Welcome to our water potability prediction system"
 
-@app.post("/predict")
+@app.post('/predict')
 def model_predict(water: Water):
-    sample = pd.DataFrame({
-        'ph' : [water.ph],
-        'Hardness' : [water.Hardness],
-        'Solids' :[water.Solids],
-        'Chloramines' :[water.Chloramines],
-        'Sulfate' : [water.Sulfate],
-        'Conductivity' :[water.Conductivity],
-        'Organic_carbon' :[water.Organic_carbon],
-        'Trihalomethanes' : [water.Trihalomethanes],
-        'Turbidity' :[water.Turbidity]
-    })
+    sample = pd.DataFrame([{
+        'ph': water.ph,
+        'Hardness': water.Hardness,
+        'Solids': water.Solids,
+        'Chloramines': water.Chloramines,
+        'Sulfate': water.Sulfate,
+        'Conductivity': water.Conductivity,
+        'Organic_carbon': water.Organic_carbon,
+        'Trihalomethanes': water.Trihalomethanes,  # Corrected spelling
+        'Turbidity': water.Turbidity
+    }])
 
     predicted_value = model.predict(sample)
 
-
-    if predicted_value == 1:
-        return "Water is Consumable"
-    else:
-        return "Water is not Consumable"
+    return "Water is Consumable" if predicted_value == 1 else "Water is not Consumable"

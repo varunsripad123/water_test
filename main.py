@@ -9,7 +9,7 @@ app=FastAPI(
 )
 
 #Loading our pretrained model
-with open('C:/Users/kvaru/OneDrive - UT Arlington/MLops/water potability/model.pkl','rb') as f:
+with open('model.pkl','rb') as f:
     model=pickle.load(f)
 
     #Here is our first checkpoint
